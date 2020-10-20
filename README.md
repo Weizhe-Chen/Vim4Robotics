@@ -3,6 +3,7 @@
   * Download nvim.appimage from https://github.com/neovim/neovim/releases/nightly
   * Run `chmod u+x nvim.appimage`
   * Move the application image file to `/usr/local/bin` and change its name to `vim`
+  * `sudo apt install xsel`: copy to system clipboard
 
 2. Install vim-plug
 ```bash
