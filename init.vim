@@ -22,6 +22,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'lfilho/cosco.vim'
 Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'dense-analysis/ale'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -92,6 +93,7 @@ set shiftwidth=2            " indent width
 set expandtab               " replace tabs with spaces
 set nowrap                  " disable line wrapping
 set clipboard+=unnamedplus  " copy to system clipboard
+" set textwidth=80            " 80 columns restriction
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
