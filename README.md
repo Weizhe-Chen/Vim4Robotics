@@ -47,11 +47,10 @@ sudo mv ./ccls /usr/local/bin/
 ccls --version
 ```
 
-13. `:CocInstall coc-snippets`
+13. `:CocInstall coc-snippets coc-json coc-python`
 
-14. `:CocInstall coc-json`
 
-15. `:CocConfig`
+14. `:CocConfig`
 ```
 {
   "languageserver": {
@@ -68,6 +67,9 @@ ccls --version
         }
       }
     }
-  }
+  },
+  "python.jediEnabled": false
 }
 ```
+
+15. `sudo apt install ctags`
