@@ -23,6 +23,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'lfilho/cosco.vim'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'dense-analysis/ale'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

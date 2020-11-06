@@ -25,7 +25,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 9. Run `:PlugInstall` in vim
 
-10. `:CocInstall coc-python`
+10. `:CocInstall coc-python coc-git`
 
 11. `:CocConfig`
 ```
