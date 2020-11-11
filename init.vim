@@ -381,6 +381,6 @@ colorscheme onedark
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " cosco.vim (semicolon)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType cpp nmap <silent> <c-l> <Plug>(cosco-commaOrSemiColon)<ESC>
-autocmd FileType cpp imap <silent> <c-l> <c-o><Plug>(cosco-commaOrSemiColon)<ESC>
+autocmd FileType m,h,hpp,c,cpp,dot nmap <silent> <c-l> <Plug>(cosco-commaOrSemiColon)<ESC>
+autocmd FileType m,h,hpp,c,cpp,dot imap <silent> <c-l> <c-o><Plug>(cosco-commaOrSemiColon)<ESC>
 let g:cosco_ignore_comment_lines = 1     " Default : 0
