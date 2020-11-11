@@ -1,6 +1,6 @@
 # Neovim Configuration for C++ and Python 
 
-1. Install Miniconda
+1. Install neovim appimage
 
 2. `pip install neovim`
 
@@ -50,3 +50,5 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 ```
 
 12. `sudo apt install xsel`: copy to system clipboard
+
+13. `sudo apt install clang-format`: formatter
