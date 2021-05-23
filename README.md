@@ -1,4 +1,4 @@
-# Neovim Configuration for C++ and Python 
+# Neovim Configuration for C++ and Python
 
 1. Install neovim appimage (apt installs an old version of neovim)
    1. https://github.com/neovim/neovim/releases
