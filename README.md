@@ -64,3 +64,5 @@ cp ./init.vim ~/.config/nvim/
     2. `nvr --remote-silent +%l %f`
     3. Might need to install `pip install neovim-remote`
     4. Shift + left click brings the cursor in the editor to the corresponding location
+
+14. Snippets: `pip install unicode`
