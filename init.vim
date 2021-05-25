@@ -97,7 +97,7 @@ set shiftwidth=2            " indent width
 set expandtab               " replace tabs with spaces
 set nowrap                  " disable line wrapping
 set clipboard+=unnamedplus  " copy to system clipboard
-" set textwidth=80            " 80 columns restriction
+set guicursor=a:blinkon100  " Blinking cursor
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -479,3 +479,4 @@ let g:vimtex_view_general_options_latexmk = '--unique'
 " vim-gutentags
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gutentags_cache_dir = '.git/tags'
+
