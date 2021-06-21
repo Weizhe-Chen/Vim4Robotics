@@ -35,7 +35,7 @@ cp ./init.vim ~/.config/nvim/
 
 10. `:CocInstall coc-python coc-git coc-cmake coc-json coc-vimtex`
 
-11. `sudo apt install xsel clang-format`
+11. `sudo apt install xsel clang-format exuberant-ctags`
 
 12. `:CocConfig`
 ```
