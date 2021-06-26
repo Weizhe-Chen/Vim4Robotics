@@ -482,4 +482,4 @@ let g:vimtex_compiler_latexmk = {
 " vim-gutentags
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gutentags_cache_dir = '.git/tags'
-
+let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git'] 
