@@ -1,11 +1,15 @@
 # Neovim Configuration for C++ and Python
 
 1. Install neovim appimage (apt installs an old version of neovim)
-   1. https://github.com/neovim/neovim/releases
-   2. Click `Assets` and download `nvim.appimage`
-   3. Make it executable: `chmod u+x nvim.appimage`
-   4. Move it to `/usr/local/bin/` and rename it: `sudo mv nvim.appimage /usr/bin/vim`
+
+   ```bash
+   curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+   chmod u+x nvim.appimage
+   sudo mv nvim.appimage /usr/bin/vim
+   ```
+
 2. `pip install neovim`
+
 3. Install nodejs
 ```bash
 # We might need to install curl first
@@ -35,7 +39,7 @@ cp ./init.vim ~/.config/nvim/
 
 10. `:CocInstall coc-python coc-git coc-cmake coc-json coc-vimtex`
 
-11. `sudo apt install xsel clang-format exuberant-ctags`
+11. `sudo apt install xsel clang-format`
 
 12. `:CocConfig`
 ```

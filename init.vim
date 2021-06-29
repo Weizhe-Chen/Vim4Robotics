@@ -26,7 +26,7 @@ Plug 'dense-analysis/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'lervag/vimtex'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'yegappan/taglist'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -477,9 +477,7 @@ let g:vimtex_compiler_latexmk = {
     \ 'build_dir' : 'build',
     \}
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-gutentags
+" taglist
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:gutentags_cache_dir = '.git/tags'
-let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git'] 
+nnoremap <F12> :TlistToggle<CR>
