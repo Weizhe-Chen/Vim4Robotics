@@ -40,7 +40,7 @@ cp ./init.vim ~/.config/nvim/
 
 9. Run `:PlugInstall` in vim
 
-10. `:CocInstall coc-python coc-git coc-cmake coc-json coc-vimtex`
+10. `:CocInstall coc-pyright coc-git coc-cmake coc-json coc-vimtex`
 
 11. `sudo apt install xsel clang-format ctags`
 

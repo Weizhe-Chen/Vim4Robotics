@@ -85,7 +85,7 @@ set undofile                " maintain undo history between sessions
 set undodir=~/.vim/undodir  " mkdir ~/.vim/undodir
 set ruler                   " highlight current line
 set autoindent              " set paste to disable auto indent
-set mouse-=a                " I hate using mouse
+set mouse+=a                " enable mouse to browse documentation in code
 set title                   " show file title
 set scrolloff=7             " scrolling offset
 set hlsearch                " highlight search results
