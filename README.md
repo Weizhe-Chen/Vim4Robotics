@@ -27,7 +27,10 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ```
 
-7. Create folders: `mkdir -p ~/.config/nvim/plugged/`
+7. Create folders:
+```bash
+mkdir -p ~/.config/nvim/plugged/
+```
 
 8. Copy `init.vim` to `~/.config/nvim/init.vim`:
 ```bash
@@ -39,7 +42,7 @@ cp ./init.vim ~/.config/nvim/
 
 10. `:CocInstall coc-python coc-git coc-cmake coc-json coc-vimtex`
 
-11. `sudo apt install xsel clang-format`
+11. `sudo apt install xsel clang-format ctags`
 
 12. `:CocConfig`
 ```
