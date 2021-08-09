@@ -8,7 +8,7 @@
    sudo mv nvim.appimage /usr/bin/vim
    ```
 
-2. `pip install neovim`
+2. `pip install neovim data-science-types`
 
 3. Install nodejs
 ```bash
