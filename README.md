@@ -5,7 +5,7 @@
    ```bash
    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
    chmod u+x nvim.appimage
-   sudo mv nvim.appimage /usr/bin/vim
+   sudo mv nvim.appimage /bin/vim
    ```
 
 2. `pip install neovim data-science-types`
