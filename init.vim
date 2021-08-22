@@ -15,8 +15,8 @@ Plug 'google/vim-codefmt'
 " Also add Glaive, which is used to configure codefmt's maktaba flags. See
 " `:help :Glaive` for usage.
 Plug 'google/vim-glaive'
-"onedark color scheme
-Plug 'joshdick/onedark.vim'
+"color scheme
+Plug 'sainnhe/edge'
 "vim-polyglot for better hightlight
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
@@ -65,13 +65,13 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Auto closing brackets.
 inoremap ( ()<LEFT>
 inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
-inoremap <leader>( (
+" inoremap <leader>( (
 inoremap [ []<LEFT>
 inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
-inoremap <leader>[ [
+" inoremap <leader>[ [
 inoremap { {}<LEFT>
 inoremap <expr> }  strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
-inoremap <leader>{ {
+" inoremap <leader>{ {
 inoremap <expr> <CR> strpart(getline('.'), col('.')-1, 1) == "}" ? "\<CR>\<ESC>\k\o" : "<CR>"
 " inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
 " inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
@@ -95,10 +95,10 @@ set encoding=utf-8          " utf-8 encoding scheme
 set tabstop=2               " how many columns a tab counts for?
 set shiftwidth=2            " indent width
 set expandtab               " replace tabs with spaces
-set nowrap                  " disable line wrapping
+" set nowrap                  " disable line wrapping
 set clipboard+=unnamedplus  " copy to system clipboard
 set guicursor=a:blinkon100  " Blinking cursor
-
+set spelllang=en,cjk        " Spell check languages
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc-vim
@@ -356,8 +356,7 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
-colorscheme onedark
-
+colorscheme edge
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " cosco.vim (semicolon)
@@ -481,3 +480,9 @@ let g:vimtex_compiler_latexmk = {
 " taglist
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <F12> :TlistToggle<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" spell check
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <silent> <C-s> :set spell!<cr>
+inoremap <silent> <C-s> :set spell!<cr>
