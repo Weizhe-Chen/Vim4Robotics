@@ -16,6 +16,7 @@ Plug 'google/vim-codefmt'
 " `:help :Glaive` for usage.
 Plug 'google/vim-glaive'
 "color scheme
+Plug 'joshdick/onedark.vim'
 Plug 'sainnhe/edge'
 "vim-polyglot for better hightlight
 Plug 'sheerun/vim-polyglot'
@@ -99,6 +100,7 @@ set expandtab               " replace tabs with spaces
 set clipboard+=unnamedplus  " copy to system clipboard
 set guicursor=a:blinkon100  " Blinking cursor
 set spelllang=en,cjk        " Spell check languages
+set colorcolumn=80          " colored 80 characters line
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc-vim
@@ -267,9 +269,13 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-n> :NERDTreeToggle<CR>
 " Close vim if the only window left is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeWinSize = 20
+" Start NERDTree
+autocmd VimEnter * NERDTree
+" Go to previous (last accessed) window.
+autocmd VimEnter * wincmd p
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -356,7 +362,8 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
-colorscheme edge
+" colorscheme edge
+colorscheme onedark
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " cosco.vim (semicolon)
@@ -479,10 +486,23 @@ let g:vimtex_compiler_latexmk = {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " taglist
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <F12> :TlistToggle<CR>
+nnoremap <F12> :TlistToggle<CR> :NERDTreeToggle<CR>
+let Tlist_Use_Right_Window = 1
+let Tlist_WinWidth = 40
+let Tlist_File_Fold_Auto_Close = 1
+let Tlist_Compact_Format = 1
+let Tlist_Enable_Fold_Column = 0
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " spell check
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <silent> <C-s> :set spell!<cr>
 inoremap <silent> <C-s> :set spell!<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" run python
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <silent> <F5> :term python %<cr>
