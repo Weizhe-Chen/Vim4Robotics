@@ -271,11 +271,12 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Close vim if the only window left is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let g:NERDTreeWinSize = 20
+let g:NERDTreeWinSize = 30
 " Start NERDTree
 autocmd VimEnter * NERDTree
 " Go to previous (last accessed) window.
 autocmd VimEnter * wincmd p
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
