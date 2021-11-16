@@ -5,7 +5,7 @@ call plug#begin('~/.config/nvim/plugged/')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdtree'
 Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'Weizhe-Chen/vim-snippets'
 Plug 'derekwyatt/vim-fswitch'
 Plug 'preservim/nerdcommenter'
 " Add maktaba and codefmt to the runtimepath.
@@ -273,7 +273,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeWinSize = 30
 " Start NERDTree
-autocmd VimEnter * NERDTree
+" autocmd VimEnter * NERDTree
 " Go to previous (last accessed) window.
 autocmd VimEnter * wincmd p
 nnoremap <C-n> :NERDTreeToggle<CR>

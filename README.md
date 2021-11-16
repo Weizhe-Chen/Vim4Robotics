@@ -27,7 +27,7 @@
    
    vim +PlugInstall
    
-   CocInstall coc-pyright coc-git coc-cmake coc-json coc-vimtex coc-clangd
+   CocInstall coc-pyright coc-git coc-cmake coc-json coc-vimtex coc-clangd coc-snippets
    CocCommand clangd.install
    # Add the following line to ~/.bashrc
    export PATH=$PATH:/home/chenweiz/.config/coc/extensions/coc-clangd-data/install/12.0.1/clangd_12.0.1/bin
