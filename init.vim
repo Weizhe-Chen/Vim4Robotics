@@ -3,31 +3,33 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.config/nvim/plugged/')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'preservim/nerdtree'
+" Snipppets
 Plug 'SirVer/ultisnips'
 Plug 'Weizhe-Chen/vim-snippets'
+" <leader>fs to switch between cpp file and h file
 Plug 'derekwyatt/vim-fswitch'
+" <C-n>
+Plug 'preservim/nerdtree'
+" <leader>c<space>
 Plug 'preservim/nerdcommenter'
-" Add maktaba and codefmt to the runtimepath.
-" (The latter must be installed before it can be used.)
+" <leader>tg
+Plug 'yegappan/taglist'
+" Auto code formatting
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
-" Also add Glaive, which is used to configure codefmt's maktaba flags. See
-" `:help :Glaive` for usage.
 Plug 'google/vim-glaive'
+Plug 'Vimjas/vim-python-pep8-indent'
 "color scheme
 Plug 'joshdick/onedark.vim'
-Plug 'sainnhe/edge'
 "vim-polyglot for better hightlight
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
+" <C-l> for adding colon at the end
 Plug 'lfilho/cosco.vim'
-Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'lervag/vimtex'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'yegappan/taglist'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -280,7 +282,7 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" coc-snippets
+" Snippets
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
 " - https://github.com/Valloric/YouCompleteMe
@@ -363,7 +365,6 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
-" colorscheme edge
 colorscheme onedark
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
