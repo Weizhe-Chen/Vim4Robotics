@@ -6,6 +6,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Snipppets
 Plug 'SirVer/ultisnips'
 Plug 'Weizhe-Chen/vim-snippets'
+Plug 'vim-scripts/DoxygenToolkit.vim'
 " <leader>fs to switch between cpp file and h file
 Plug 'derekwyatt/vim-fswitch'
 " <C-n>
@@ -508,3 +509,23 @@ inoremap <silent> <C-s> :set spell!<cr>
 " run python
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <silent> <F5> :term python %<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" DoxygenToolkit
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Change @ to \ for C++
+let g:DoxygenToolkit_commentType = "C++"
+" let g:DoxygenToolkit_briefTag_pre = "\\brief  "
+" let g:DoxygenToolkit_templateParamTag_pre = "\\tparam "
+" let g:DoxygenToolkit_paramTag_pre = "\\param "
+" let g:DoxygenToolkit_returnTag = "\\return"
+" let g:DoxygenToolkit_throwTag_pre = "\\throw"
+" let g:DoxygenToolkit_fileTag = "\\file"
+" let g:DoxygenToolkit_dateTag = "\\date"
+" let g:DoxygenToolkit_authorTag = "\\author"
+" let g:DoxygenToolkit_versionTag = "\\version"
+" let g:DoxygenToolkit_blockTag = "\\name"
+" let g:DoxygenToolkit_classTag = "\\class"
+let g:DoxygenToolkit_authorName="Weizhe (Wesley) Chen, chenweiz@iu.edu"
+let g:doxygen_enhanced_color = 1
+let g:load_doxygen_syntax = 1
