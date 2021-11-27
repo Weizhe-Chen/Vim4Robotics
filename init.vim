@@ -5,7 +5,7 @@ call plug#begin('~/.config/nvim/plugged/')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Snipppets
 Plug 'SirVer/ultisnips'
-Plug 'Weizhe-Chen/vim-snippets'
+Plug 'git@github.com:Weizhe-Chen/vim-snippets.git'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 " <leader>fs to switch between cpp file and h file
 Plug 'derekwyatt/vim-fswitch'
@@ -22,15 +22,13 @@ Plug 'google/vim-glaive'
 Plug 'Vimjas/vim-python-pep8-indent'
 "color scheme
 Plug 'joshdick/onedark.vim'
-"vim-polyglot for better hightlight
-" Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 " <C-l> for adding colon at the end
 Plug 'lfilho/cosco.vim'
-" Plug 'dense-analysis/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'lervag/vimtex'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'chrisbra/csv.vim'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -62,6 +60,8 @@ if has('clipboard')
         set clipboard=unnamed
     endif
 endif
+" 'p' to paste, 'gv' to re-select what was originally selected. 'y' to copy it again
+xnoremap p pgvy
 " jump to the last position when reopening a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 " Disable automatical comment insertion
@@ -103,7 +103,7 @@ set expandtab               " replace tabs with spaces
 set clipboard+=unnamedplus  " copy to system clipboard
 set guicursor=a:blinkon100  " Blinking cursor
 set spelllang=en,cjk        " Spell check languages
-set colorcolumn=80          " colored 80 characters line
+set colorcolumn=120          " colored 120 characters line
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc-vim
@@ -299,8 +299,8 @@ let g:UltiSnipsEditSplit="vertical"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-fswitch
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufEnter *.h let b:fswitchdst = 'cpp,cc,c' | let b:fswitchlocs = 'reg:|include.*|src/**|'
 nmap <silent> <leader>fs :FSHere<cr>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " nerdcommenter
@@ -506,26 +506,28 @@ inoremap <silent> <C-s> :set spell!<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" run python
+" run python and cpp
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <silent> <F5> :term python %<cr>
+autocmd filetype py nnoremap <silent> <F5> :term python %<cr>
+autocmd filetype cpp nnoremap <silent> <F5> :w <bar> !g++-8 -std=c++17 % -o %:r && ./%:r<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DoxygenToolkit
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Change @ to \ for C++
-let g:DoxygenToolkit_commentType = "C++"
-" let g:DoxygenToolkit_briefTag_pre = "\\brief  "
-" let g:DoxygenToolkit_templateParamTag_pre = "\\tparam "
-" let g:DoxygenToolkit_paramTag_pre = "\\param "
-" let g:DoxygenToolkit_returnTag = "\\return"
-" let g:DoxygenToolkit_throwTag_pre = "\\throw"
-" let g:DoxygenToolkit_fileTag = "\\file"
-" let g:DoxygenToolkit_dateTag = "\\date"
-" let g:DoxygenToolkit_authorTag = "\\author"
-" let g:DoxygenToolkit_versionTag = "\\version"
-" let g:DoxygenToolkit_blockTag = "\\name"
-" let g:DoxygenToolkit_classTag = "\\class"
-let g:DoxygenToolkit_authorName="Weizhe (Wesley) Chen, chenweiz@iu.edu"
 let g:doxygen_enhanced_color = 1
 let g:load_doxygen_syntax = 1
+let g:DoxygenToolkit_commentType = "C++"
+" let g:DoxygenToolkit_briefTag_pre = " \\brief  "
+" let g:DoxygenToolkit_templateParamTag_pre = " \\tparam "
+" let g:DoxygenToolkit_paramTag_pre = " \\param "
+" let g:DoxygenToolkit_returnTag = " \\return"
+" let g:DoxygenToolkit_throwTag_pre = " \\throw"
+" let g:DoxygenToolkit_fileTag = " \\file"
+" let g:DoxygenToolkit_dateTag = " \\date"
+" let g:DoxygenToolkit_authorTag = " \\author"
+" let g:DoxygenToolkit_versionTag = " \\version"
+" let g:DoxygenToolkit_blockTag = " \\name"
+" let g:DoxygenToolkit_classTag = " \\class"
+let g:DoxygenToolkit_authorName=" Weizhe (Wesley) Chen, chenweiz@iu.edu"
+let g:DoxygenToolkit_licenseTag = "MIT License\<enter>\<enter>Copyright (c) 2021 Weizhe Chen\<enter>\<enter>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\<enter>\<enter> THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+nnoremap <leader>d :Dox<cr>
