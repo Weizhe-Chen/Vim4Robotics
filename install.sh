@@ -74,7 +74,7 @@ pip3 install neovim neovim-remote unidecode
 echo "========================================================================="
 echo "Install node..."
 echo "========================================================================="
-curl -sL install-node.now.sh/lts | sudo bash | y
+curl -sL install-node.now.sh/lts | sudo bash
 echo "========================================================================="
 echo "Node install neovim..."
 echo "========================================================================="
