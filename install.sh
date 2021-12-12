@@ -76,9 +76,9 @@ echo "Install node..."
 echo "========================================================================="
 curl -sL install-node.now.sh/lts | sudo bash
 echo "========================================================================="
-echo "Node install neovim..."
+echo "Node install neovim and yarn..."
 echo "========================================================================="
-sudo npm -g install neovim
+sudo npm -g install neovim yarn
 
 #################################
 # Vim Configuration and Plugins #
