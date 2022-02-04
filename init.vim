@@ -22,6 +22,7 @@ Plug 'google/vim-glaive'
 Plug 'Vimjas/vim-python-pep8-indent'
 "color scheme
 Plug 'joshdick/onedark.vim'
+Plug 'sainnhe/sonokai'
 Plug 'vim-airline/vim-airline'
 " <C-l> for adding colon at the end
 Plug 'lfilho/cosco.vim'
@@ -30,6 +31,8 @@ Plug 'lervag/vimtex'
 Plug 'chrisbra/csv.vim'
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+" vim-translator
+Plug 'voldikss/vim-translator'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -63,6 +66,14 @@ if has('clipboard')
 endif
 " 'p' to paste, 'gv' to re-select what was originally selected. 'y' to copy it again
 xnoremap p pgvy
+
+" delete without yanking
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+" replace currently selected text with default register
+" without yanking it
+vnoremap <leader>p "_dP
 " jump to the last position when reopening a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 " Disable automatical comment insertion
@@ -104,7 +115,7 @@ set expandtab               " replace tabs with spaces
 set clipboard+=unnamedplus  " copy to system clipboard
 set guicursor=a:blinkon100  " Blinking cursor
 set spelllang=en,cjk        " Spell check languages
-set colorcolumn=120          " colored 120 characters line
+set colorcolumn=80          " Line length limit
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc-vim
@@ -118,7 +129,7 @@ set nobackup
 set nowritebackup
 
 " Give more space for displaying messages.
-set cmdheight=2
+set cmdheight=1
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -295,6 +306,8 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+" Python docstirng style
+let g:ultisnips_python_style = 'numpy'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -367,7 +380,8 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
-colorscheme onedark
+" colorscheme onedark
+colorscheme sonokai
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " cosco.vim (semicolon)
@@ -395,6 +409,11 @@ let g:vimtex_compiler_latexmk = {
     \ ],
     \}
 
+let g:vimtex_quickfix_ignore_filters = [
+      \ 'Underfull',
+      \ 'Overfull',
+      \]
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " taglist
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -410,8 +429,15 @@ let Tlist_GainFocus_On_ToggleOpen = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " spell check
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <silent> <C-s> :set spell!<cr>
-inoremap <silent> <C-s> :set spell!<cr>
+nnoremap <silent> <leader>spell :set spell!<cr>
+inoremap <silent> <leader>spell :set spell!<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-translator
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Display translation in a window
+nmap <silent> <Leader>t <Plug>TranslateW
+vmap <silent> <Leader>t <Plug>TranslateWV
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
