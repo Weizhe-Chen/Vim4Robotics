@@ -412,6 +412,8 @@ let g:vimtex_compiler_latexmk = {
 let g:vimtex_quickfix_ignore_filters = [
       \ 'Underfull',
       \ 'Overfull',
+      \ 'Package subfig Warning',
+      \ 'Package balance Warning',
       \]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
