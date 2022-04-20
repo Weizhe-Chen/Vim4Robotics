@@ -5,7 +5,7 @@ call plug#begin('~/.config/nvim/plugged/')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Snipppets
 Plug 'SirVer/ultisnips'
-Plug 'git@github.com:Weizhe-Chen/vim-snippets.git'
+Plug 'Weizhe-Chen/vim-snippets'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 " <leader>fs to switch between cpp file and h file
 Plug 'derekwyatt/vim-fswitch'
@@ -116,6 +116,11 @@ set clipboard+=unnamedplus  " copy to system clipboard
 set guicursor=a:blinkon100  " Blinking cursor
 set spelllang=en,cjk        " Spell check languages
 set colorcolumn=80          " Line length limit
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" neovim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:python3_host_prog='/home/chenweiz/mambaforge/bin/python3'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc-vim
