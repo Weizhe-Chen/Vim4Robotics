@@ -12,7 +12,9 @@ sudo apt-get install clangd-10 -y  # C++ language server. Might be clangd-12 on 
 sudo apt-get install automake -y  # Required for building universal-ctags from source
 sudo apt-get install neovim -y
 sudo apt-get install curl -y
-curl -sL install-node.now.sh/lts | sudo bash
+curl -sfLS install-node.vercel.app | bash -s -- --prefix=$HOME
+# Add the following line to your ~/.bashrc
+export PATH=$PATH:$HOME/bin
 sudo npm -g install neovim yarn
 
 # Ctags
@@ -23,8 +25,7 @@ cd ctags
 make -j12
 sudo make install
 
-# Install mambaforge from https://github.com/conda-forge/miniforge
-pip install neovim neovim-remote unidecode
+pip install neovim neovim-remote unidecode pynvim
 
 # Vim Plug
 curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -33,10 +34,20 @@ curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --c
 mkdir -p ~/.config/nvim/plugged/
 cd ~/clone/neovim-cpp-python
 cp ./init.vim ~/.config/nvim/
+```
 
-# Install plugins
-vim +'PlugInstall'
-vim +'CocInstall -sync coc-pyright coc-git coc-cmake coc-json coc-vimtex coc-clangd coc-snippets'
+Change the following path accordingly in your `~/.config/nvim/init.vim`.
+
+```
+let g:python3_host_prog='/usr/bin/python3'
+let g:coc_node_path='$HOME/bin/node'
+```
+Open `vim` and install the plugins.
+
+```
+# In Vim
+:PlugInstall
+:CocInstall coc-pyright coc-git coc-cmake coc-json coc-vimtex coc-clangd coc-snippets
 ```
 
 ## Backward search in Okular

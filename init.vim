@@ -120,12 +120,12 @@ set colorcolumn=80          " Line length limit
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neovim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python3_host_prog='/home/chenweiz/mambaforge/bin/python3'
+let g:python3_host_prog='/usr/bin/python3'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:coc_node_path='/usr/local/bin/node'
+let g:coc_node_path='$HOME/bin/node'
 " TextEdit might fail if hidden is not set.
 set hidden
 
