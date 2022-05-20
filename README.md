@@ -4,14 +4,15 @@
 
 ```bash
 sudo add-apt-repository ppa:neovim-ppa/stable
-sudo apt-get update -y
-sudo apt-get install xsel -y  # For accessing the system clipboard
-sudo apt-get install clang-format -y  # For C++ auto-formatting
+sudo apt update -y
+sudo apt install xsel -y  # For accessing the system clipboard
+sudo apt install clang-format -y  # For C++ auto-formatting
 apt search clangd  # Check latest clangd version
-sudo apt-get install clangd-10 -y  # C++ language server. Might be clangd-12 on Ubuntu 20.04
-sudo apt-get install automake -y  # Required for building universal-ctags from source
-sudo apt-get install neovim -y
-sudo apt-get install curl -y
+sudo apt install clangd-10 -y  # C++ language server. Might be clangd-12 on Ubuntu 20.04
+sudo apt install automake -y  # Required for building universal-ctags from source
+sudo apt install neovim -y
+sudo apt install curl -y
+sudo apt install python3-pygments -y  # For minted latex package
 curl -sfLS install-node.vercel.app | bash -s -- --prefix=$HOME
 # Add the following line to your ~/.bashrc
 export PATH=$PATH:$HOME/bin
