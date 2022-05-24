@@ -91,7 +91,7 @@ cp ./init.vim ~/.config/nvim/
 
 Find your Python3 and nodejs executables
 ```
-which python
+which python3
 which node
 ```
 
