@@ -125,7 +125,7 @@ let g:python3_host_prog='/usr/bin/python3'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:coc_node_path='$HOME/bin/node'
+let g:coc_node_path='$HOME/nodejs/bin/node'
 " TextEdit might fail if hidden is not set.
 set hidden
 
