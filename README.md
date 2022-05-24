@@ -70,7 +70,7 @@ npm install neovim yarn
 Install ctags
 ```
 git clone https://github.com/universal-ctags/ctags.git
-cd ctags & ./autogen.sh & ./configure
+cd ctags && ./autogen.sh && ./configure
 # Check the number of CPUs on your machine
 lscpu | grep "CPU(s)"
 make -j 12  # Change 12 to the number of threads on your machine
