@@ -2,56 +2,116 @@
 
 ## Installation
 
-```bash
+Add NeoVim to ppa so that we can install it using apt
+```
 sudo add-apt-repository ppa:neovim-ppa/stable
+```
+
+Update package source after adding ppa
+```
 sudo apt update -y
-sudo apt install xsel -y  # For accessing the system clipboard
-sudo apt install clang-format -y  # For C++ auto-formatting
-apt search clangd  # Check latest clangd version
-sudo apt install clangd-10 -y  # C++ language server. Might be clangd-12 on Ubuntu 20.04
-sudo apt install automake -y  # Required for building universal-ctags from source
+```
+
+For accessing the system clipboard
+```
+sudo apt install xsel -y
+```
+
+For C++ auto-formatting
+```
+sudo apt install clang-format -y
+```
+
+Check latest clangd version Typically you will find clangd-10 on Ubuntu 18.04 and clangd-12 on Ubuntu 20.04
+```
+apt search clangd
+```
+
+Install clangd. Change the version number `10` accordingly. 
+```
+sudo apt install clangd-10 -y
+```
+
+Required for building universal-ctags from source
+```
+sudo apt install automake -y
+```
+
+Install NeoVim
+```
 sudo apt install neovim -y
+```
+
+Install curl
+```
 sudo apt install curl -y
-sudo apt install python3-pygments -y  # For minted latex package
-curl -sfLS install-node.vercel.app | bash -s -- --prefix=$HOME
-# Add the following line to your ~/.bashrc
-export PATH=$PATH:$HOME/bin
-sudo npm -g install neovim yarn
+```
 
-# Ctags
+Install Python supports
+```
+sudo apt-get install python3-pip -y
+pip3 install --upgrade pip
+pip3 install pynvim
+pip3 install pygments
+pip3 install neovim-remote
+pip3 install unidecode
+```
+
+Install node and npm without sudo
+```
+mkdir ~/nodejs
+curl -sfLS install-node.vercel.app | bash -s -- --prefix=$HOME/nodejs --version=12
+# Press y and add the executables `node` and `npm` to your `~/.bashrc`
+export PATH=$PATH:$HOME/nodejs/bin
+. ~/.bashrc
+npm install neovim yarn
+```
+
+Install ctags
+```
 git clone https://github.com/universal-ctags/ctags.git
-cd ctags
-./autogen.sh
-./configure
-make -j12
+cd ctags & ./autogen.sh & ./configure
+# Check the number of CPUs on your machine
+lscpu | grep "CPU(s)"
+make -j 12  # Change 12 to the number of threads on your machine
 sudo make install
+```
 
-pip install neovim neovim-remote unidecode pynvim
-
-# Vim Plug
+Install vim plug
+```
 curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
 
-# Configuration
+Copy my vim configuration
+```
 mkdir -p ~/.config/nvim/plugged/
 cd ~/clone/neovim-cpp-python
 cp ./init.vim ~/.config/nvim/
 ```
 
-Change the following path accordingly in your `~/.config/nvim/init.vim`.
-
+Find your Python3 and nodejs executables
 ```
+which python
+which node
+```
+
+Change the the python3 and node paths accordingly in your `~/.config/nvim/init.vim`.
+```
+vim ~/.config/nvim/init.vim
 let g:python3_host_prog='/usr/bin/python3'
-let g:coc_node_path='$HOME/bin/node'
+let g:coc_node_path='$HOME/bin/nodejs/node'
 ```
-Open `vim` and install the plugins.
+Install plugins
+```
+vim
+# Press : and then type in
+# Install vim plugins
+PlugInstall
+# Install coc.nvim plugins
+CocInstall coc-pyright coc-git coc-cmake coc-json coc-vimtex coc-clangd coc-snippets
+```
 
-```
-# In Vim
-:PlugInstall
-:CocInstall coc-pyright coc-git coc-cmake coc-json coc-vimtex coc-clangd coc-snippets
-```
-
-## Backward search in Okular
+Configure backward search in Okular
 
 1. "Settings > Editor > Custom Text Editor"
 2. `nvr --remote-silent +%l %f`
