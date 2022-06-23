@@ -21,8 +21,8 @@ Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
 Plug 'Vimjas/vim-python-pep8-indent'
 "color scheme
-Plug 'joshdick/onedark.vim'
-Plug 'sainnhe/sonokai'
+" Plug 'joshdick/onedark.vim'
+Plug 'ayu-theme/ayu-vim'
 Plug 'vim-airline/vim-airline'
 " <C-l> for adding colon at the end
 Plug 'lfilho/cosco.vim'
@@ -120,12 +120,12 @@ set colorcolumn=80          " Line length limit
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neovim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python3_host_prog='/usr/bin/python3'
+let g:python3_host_prog='/Users/chenweiz/mambaforge/bin/python3'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:coc_node_path='$HOME/nodejs/bin/node'
+let g:coc_node_path='/opt/homebrew/bin/node'
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -296,6 +296,10 @@ let g:NERDTreeWinSize = 30
 " autocmd VimEnter * NERDTree
 " Go to previous (last accessed) window.
 autocmd VimEnter * wincmd p
+" enable line numbers
+let NERDTreeShowLineNumbers=1
+" make sure relative line numbers are used
+autocmd FileType nerdtree setlocal relativenumber
 nnoremap <C-n> :NERDTreeToggle<CR>
 
 
@@ -386,7 +390,10 @@ if (empty($TMUX))
   endif
 endif
 " colorscheme onedark
-colorscheme sonokai
+let ayucolor="light"  " for light version of theme
+" let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " cosco.vim (semicolon)
