@@ -33,6 +33,8 @@ Plug 'chrisbra/csv.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " vim-translator
 Plug 'voldikss/vim-translator'
+" vim-pydocstring
+Plug 'heavenshell/vim-pydocstring', {'do': 'make install', 'for': 'python'}
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -432,8 +434,9 @@ let g:vimtex_quickfix_ignore_filters = [
 " taglist
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <C-t> :TlistToggle<CR>
+nnoremap <silent><F12> :TlistUpdate<CR>
 let Tlist_Use_Right_Window = 1
-let Tlist_WinWidth = 40
+let Tlist_WinWidth = 50
 let Tlist_File_Fold_Auto_Close = 1
 let Tlist_Compact_Format = 1
 let Tlist_Enable_Fold_Column = 0
@@ -580,3 +583,19 @@ let g:mkdp_filetypes = ['markdown']
 nmap <C-s> <Plug>MarkdownPreview
 nmap <M-s> <Plug>MarkdownPreviewStop
 nmap <C-p> <Plug>MarkdownPreviewToggle
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Format XML
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>f :%!xmllint --format -<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remove all trailing whitespace by pressing F6
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader><F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pydocstring
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:pydocstring_formatter = 'numpy'
+nmap <silent> <leader>d <Plug>(pydocstring)
