@@ -60,10 +60,10 @@ pip3 install unidecode
 Install node and npm without sudo
 ```
 mkdir ~/nodejs
-curl -sfLS install-node.vercel.app | bash -s -- --prefix=$HOME/nodejs --version=12
 # Press y and add the executables `node` and `npm` to your `~/.bashrc`
 export PATH=$PATH:$HOME/nodejs/bin
 . ~/.bashrc
+curl -sfLS install-node.vercel.app | bash -s -- --prefix=$HOME/nodejs --version=12
 npm install neovim yarn
 ```
 
