@@ -21,8 +21,7 @@ Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
 Plug 'Vimjas/vim-python-pep8-indent'
 "color scheme
-" Plug 'joshdick/onedark.vim'
-Plug 'ayu-theme/ayu-vim'
+Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 " <C-l> for adding colon at the end
 Plug 'lfilho/cosco.vim'
@@ -122,12 +121,12 @@ set colorcolumn=80          " Line length limit
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neovim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python3_host_prog='/home/chenweiz/mambaforge/bin/python3'
+let g:python3_host_prog='/usr/bin/python3'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:coc_node_path='/usr/local/bin/node'
+let g:coc_node_path='/home/wchen/nodejs/bin/node'
 
 " Some servers have issues with backup files, see #649.
 set nobackup
@@ -384,10 +383,10 @@ if (empty($TMUX))
   endif
 endif
 " colorscheme onedark
-let ayucolor="light"  " for light version of theme
+" let ayucolor="light"  " for light version of theme
 " let ayucolor="mirage" " for mirage version of theme
 " let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
+colorscheme gruvbox
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " cosco.vim (semicolon)
