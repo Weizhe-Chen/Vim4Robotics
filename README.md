@@ -7,6 +7,11 @@ Add NeoVim to ppa so that we can install it using apt
 sudo add-apt-repository ppa:neovim-ppa/stable
 ```
 
+Install NeoVim
+```
+sudo apt install neovim -y
+```
+
 Update package source after adding ppa
 ```
 sudo apt update -y
@@ -37,11 +42,6 @@ Required for building universal-ctags from source
 sudo apt install automake -y
 ```
 
-Install NeoVim
-```
-sudo apt install neovim -y
-```
-
 Install curl
 ```
 sudo apt install curl -y
@@ -63,7 +63,7 @@ mkdir ~/nodejs
 # Press y and add the executables `node` and `npm` to your `~/.bashrc`
 export PATH=$PATH:$HOME/nodejs/bin
 . ~/.bashrc
-curl -sfLS install-node.vercel.app | bash -s -- --prefix=$HOME/nodejs --version=12
+curl -sfLS install-node.vercel.app | bash -s -- --prefix=$HOME/nodejs --version=16
 npm install neovim yarn
 ```
 
