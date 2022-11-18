@@ -63,7 +63,7 @@ mkdir ~/nodejs
 # Press y and add the executables `node` and `npm` to your `~/.bashrc`
 export PATH=$PATH:$HOME/nodejs/bin
 . ~/.bashrc
-curl -sfLS install-node.vercel.app | bash -s -- --prefix=$HOME/nodejs --version=16
+curl -sfLS install-node.vercel.app | bash -s -- --prefix=$HOME/nodejs --version=14
 npm install neovim yarn
 ```
 
