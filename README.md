@@ -116,3 +116,11 @@ Configure backward search in Okular
 1. "Settings > Editor > Custom Text Editor"
 2. `nvr --remote-silent +%l %f`
 3. Shift + left click brings the cursor in the editor to the corresponding location
+
+
+# Troubleshooting
+* MarkdownPreview does not work and prompts the following message:
+    ```
+    Pre build and node is not found
+    ```
+  This is because the installation is not complete. Try `:call mkdp#util#install()` to re-install the pre build.
