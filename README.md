@@ -63,7 +63,7 @@ mkdir ~/nodejs
 # Press y and add the executables `node` and `npm` to your `~/.bashrc`
 export PATH=$PATH:$HOME/nodejs/bin
 . ~/.bashrc
-curl -sfLS install-node.vercel.app | bash -s -- --prefix=$HOME/nodejs --version=14
+curl -sfLS install-node.vercel.app | bash -s -- --prefix=$HOME/nodejs --version=16
 npm install neovim yarn
 ```
 
@@ -101,6 +101,7 @@ vim ~/.config/nvim/init.vim
 let g:python3_host_prog='/usr/bin/python3'
 let g:coc_node_path='$HOME/bin/nodejs/node'
 ```
+
 Install plugins
 ```
 vim
@@ -109,6 +110,12 @@ vim
 PlugInstall
 # Install coc.nvim plugins
 CocInstall coc-pyright coc-git coc-cmake coc-json coc-vimtex coc-clangd coc-snippets
+```
+
+Setup Copilot
+```
+vim
+:Copilot setup
 ```
 
 Configure backward search in Okular
