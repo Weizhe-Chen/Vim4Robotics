@@ -64,6 +64,7 @@ mkdir ~/nodejs
 export PATH=$PATH:$HOME/nodejs/bin
 . ~/.bashrc
 curl -sfLS install-node.vercel.app | bash -s -- --prefix=$HOME/nodejs --version=16
+npm install -g npm
 npm install neovim yarn
 ```
 
