@@ -6,7 +6,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Snipppets
 Plug 'SirVer/ultisnips'
 Plug 'Weizhe-Chen/vim-snippets'
-Plug 'vim-scripts/DoxygenToolkit.vim'
 " <leader>fs to switch between cpp file and h file
 Plug 'derekwyatt/vim-fswitch'
 " <C-n>
@@ -18,8 +17,6 @@ Plug 'yegappan/taglist'
 " Auto code formatting
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
-Plug 'google/vim-glaive'
-Plug 'Vimjas/vim-python-pep8-indent'
 "color scheme
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
@@ -32,8 +29,8 @@ Plug 'chrisbra/csv.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " vim-translator
 Plug 'voldikss/vim-translator'
-" vim-pydocstring
-Plug 'heavenshell/vim-pydocstring', {'do': 'make install', 'for': 'python'}
+" Copilot
+Plug 'github/copilot.vim'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -109,8 +106,8 @@ set hlsearch                " highlight search results
 set ignorecase              " ignore upper or lower case when searching
 set autochdir               " working dir is the same as the file u r editing
 set encoding=utf-8          " utf-8 encoding scheme
-set tabstop=2               " how many columns a tab counts for?
-set shiftwidth=2            " indent width
+set tabstop=4               " how many columns a tab counts for?
+set shiftwidth=4            " indent width
 set expandtab               " replace tabs with spaces
 " set nowrap                  " disable line wrapping
 set clipboard+=unnamedplus  " copy to system clipboard
@@ -121,12 +118,12 @@ set colorcolumn=80          " Line length limit
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neovim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python3_host_prog='/usr/bin/python3'
+let g:python3_host_prog='/Users/chenweiz/mambaforge/bin/python'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:coc_node_path='/home/wchen/nodejs/bin/node'
+let g:coc_node_path='/opt/homebrew/bin/node'
 
 " Some servers have issues with backup files, see #649.
 set nobackup
@@ -579,7 +576,7 @@ nnoremap <leader>f :%!xmllint --format -<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove all trailing whitespace by pressing F6
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader><F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+nnoremap <leader>6 :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pydocstring
