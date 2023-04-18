@@ -19,6 +19,7 @@ Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 "color scheme
 Plug 'morhetz/gruvbox'
+Plug 'ayu-theme/ayu-vim'
 Plug 'vim-airline/vim-airline'
 " <C-l> for adding colon at the end
 Plug 'lfilho/cosco.vim'
@@ -31,6 +32,9 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'voldikss/vim-translator'
 " Copilot
 Plug 'github/copilot.vim'
+" Telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -109,7 +113,7 @@ set encoding=utf-8          " utf-8 encoding scheme
 set tabstop=4               " how many columns a tab counts for?
 set shiftwidth=4            " indent width
 set expandtab               " replace tabs with spaces
-" set nowrap                  " disable line wrapping
+set wrap                    " disable line wrapping
 set clipboard+=unnamedplus  " copy to system clipboard
 set guicursor=a:blinkon100  " Blinking cursor
 set spelllang=en,cjk        " Spell check languages
@@ -118,12 +122,12 @@ set colorcolumn=80          " Line length limit
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neovim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python3_host_prog='/Users/chenweiz/mambaforge/bin/python'
+let g:python3_host_prog='/usr/bin/python3'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:coc_node_path='/opt/homebrew/bin/node'
+let g:coc_node_path='~/nodejs/bin/node'
 
 " Some servers have issues with backup files, see #649.
 set nobackup
@@ -362,7 +366,7 @@ augroup END
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" onedark.vim
+" Colorscheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -379,7 +383,10 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
-colorscheme gruvbox
+let ayucolor="light"  " for light version of theme
+" let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " cosco.vim (semicolon)
@@ -446,27 +453,6 @@ vmap <silent> <Leader>t <Plug>TranslateWV
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd filetype py nnoremap <silent> <F5> :term python %<cr>
 autocmd filetype cpp nnoremap <silent> <F5> :w <bar> !g++-8 -std=c++17 % -o %:r && ./%:r<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" DoxygenToolkit
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:doxygen_enhanced_color = 1
-let g:load_doxygen_syntax = 1
-let g:DoxygenToolkit_commentType = "C++"
-" let g:DoxygenToolkit_briefTag_pre = " \\brief  "
-" let g:DoxygenToolkit_templateParamTag_pre = " \\tparam "
-" let g:DoxygenToolkit_paramTag_pre = " \\param "
-" let g:DoxygenToolkit_returnTag = " \\return"
-" let g:DoxygenToolkit_throwTag_pre = " \\throw"
-" let g:DoxygenToolkit_fileTag = " \\file"
-" let g:DoxygenToolkit_dateTag = " \\date"
-" let g:DoxygenToolkit_authorTag = " \\author"
-" let g:DoxygenToolkit_versionTag = " \\version"
-" let g:DoxygenToolkit_blockTag = " \\name"
-" let g:DoxygenToolkit_classTag = " \\class"
-let g:DoxygenToolkit_authorName=" Weizhe (Wesley) Chen, chenweiz@iu.edu"
-let g:DoxygenToolkit_licenseTag = "MIT License\<enter>\<enter>Copyright (c) 2021 Weizhe Chen\<enter>\<enter>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\<enter>\<enter> THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
-nnoremap <leader>d :Dox<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -541,7 +527,7 @@ let g:mkdp_preview_options = {
     \ 'sequence_diagrams': {},
     \ 'flowchart_diagrams': {},
     \ 'content_editable': v:false,
-    \ 'disable_filename': 0
+    \ 'disable_filename': 1
     \ }
 
 " use a custom markdown style must be absolute path
@@ -569,12 +555,7 @@ nmap <M-s> <Plug>MarkdownPreviewStop
 nmap <C-p> <Plug>MarkdownPreviewToggle
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Format XML
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>f :%!xmllint --format -<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remove all trailing whitespace by pressing F6
+" Remove all trailing whitespace by pressing \6
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader>6 :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
@@ -583,3 +564,13 @@ nnoremap <leader>6 :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:pydocstring_formatter = 'numpy'
 nmap <silent> <leader>d <Plug>(pydocstring)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Telescope
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Timestamp
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>now :pu=strftime('%H:%M:%S')<CR>
