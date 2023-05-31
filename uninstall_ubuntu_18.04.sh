@@ -12,7 +12,6 @@ pip3 uninstall pynvim neovim-remote unidecode -y
 
 echo -e "\e[32m[Remove APT dependencies]\e[0m"
 sudo apt install xsel clang-format automake -y
-sudo apt autoremove -y
 
 echo -e "\e[32m[Remove NodeJS dependencies]\e[0m"
 rm -rf ~/Neovim
@@ -23,10 +22,11 @@ rm -rf ~/.config/nvim
 
 
 echo -e "\e[32m[Remove zathura]\e[0m"
-sudo apt remove zathura -y
+sudo apt remove zathura xdotool -y
 rm -rf ~/.config/zathura/
 rm ~/.latexmkrc
 
+sudo apt autoremove -y
 echo -e "\e[32m[Successfully uninstalled Neovim!]\e[0m"
 
 end=$(date +%s)

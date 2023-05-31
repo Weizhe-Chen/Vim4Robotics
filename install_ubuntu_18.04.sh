@@ -38,7 +38,7 @@ echo "let g:python3_host_prog='$(which python3)'" >> ~/.config/nvim/init.vim
 echo "let g:coc_node_path='$(which node)'" >> ~/.config/nvim/init.vim
 
 echo -e "\e[32m[Install zathura]\e[0m"
-sudo apt install zathura -y
+sudo apt install zathura xdotool -y
 mkdir -p ~/.config/zathura/
 cd ~/.config/zathura
 wget https://raw.githubusercontent.com/Weizhe-Chen/Vim4Robotics/main/zathurarc
