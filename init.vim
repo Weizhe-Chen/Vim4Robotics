@@ -144,15 +144,8 @@ set spelllang=en,cjk        " Spell check languages
 set colorcolumn=80          " Line length limit
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" neovim
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python3_host_prog='/home/wchen/miniforge3/bin/python'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:coc_node_path='/home/wchen/Neovim/bin/node'
-
 " Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
