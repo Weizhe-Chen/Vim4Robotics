@@ -21,6 +21,12 @@ echo -e "\e[32m[Remove vim-plug and coc-vim]\e[0m"
 rm -rf ~/.config/coc
 rm -rf ~/.config/nvim
 
+
+echo -e "\e[32m[Remove zathura]\e[0m"
+sudo apt remove zathura -y
+rm -rf ~/.config/zathura/
+rm ~/.latexmkrc
+
 echo -e "\e[32m[Successfully uninstalled Neovim!]\e[0m"
 
 end=$(date +%s)
