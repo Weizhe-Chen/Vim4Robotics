@@ -2,17 +2,18 @@
 " vim-plug
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.config/nvim/plugged/')
+" coc-vim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Snipppets
 Plug 'SirVer/ultisnips'
 Plug 'Weizhe-Chen/vim-snippets'
 " <leader>fs to switch between cpp file and h file
 Plug 'derekwyatt/vim-fswitch'
-" <C-n>
+" <C-n> for NERDTree file browser
 Plug 'preservim/nerdtree'
-" <leader>c<space>
+" <leader>c<space> for commenting
 Plug 'preservim/nerdcommenter'
-" <leader>tg
+" <leader>t for TagList
 Plug 'yegappan/taglist'
 " Auto code formatting
 Plug 'google/vim-maktaba'
@@ -20,14 +21,12 @@ Plug 'google/vim-codefmt'
 "color scheme
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
-" <C-l> for adding colon at the end
+" ctrl+l for adding colon at the end
 Plug 'lfilho/cosco.vim'
 " Git
 Plug 'tpope/vim-fugitive'
 " LaTeX
 Plug 'lervag/vimtex'
-" CSV
-Plug 'chrisbra/csv.vim'
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " vim-translator
@@ -39,26 +38,10 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
-
 set background=dark
 " set background=light
 colorscheme gruvbox
-" You can also change your terminal color theme to Gruvbox
+" You can also change your terminal color theme to Gruvbox using Gogh
 " https://github.com/Gogh-Co/Gogh
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -66,23 +49,28 @@ colorscheme gruvbox
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on
 syntax on
-" Save and quit using leader key instead of :
+
+" Save and quit using leader key instead of :w and :wq
 nnoremap <leader>w :w<CR>
-nnoremap <leader>qw :wq<CR>
+nnoremap <leader><esc> :wq<CR>
+
 " Jump to the head and rear of a line using H and L
 nnoremap H ^
 nnoremap L $
 vnoremap H ^
 vnoremap L $
+
 " Jump between visual lines instead
 nnoremap k gk
 nnoremap gk k
 nnoremap j gj
 nnoremap gj j
+
 " Select the content again after shifting
 vnoremap < <gv
 vnoremap > >gv
-" Paste using p
+
+" Copy and paste
 if has('clipboard')
     if has('unnamedplus')
         set clipboard=unnamed,unnamedplus
@@ -90,21 +78,30 @@ if has('clipboard')
         set clipboard=unnamed
     endif
 endif
-" 'p' to paste, 'gv' to re-select what was originally selected. 'y' to copy it again
+" do not copy the overwrited content when pasting
 xnoremap p pgvy
-
 " delete without yanking
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
-
-" replace currently selected text with default register
-" without yanking it
+" replace currently selected text with default register without yanking it
 vnoremap <leader>p "_dP
+
+" Remove trailing white spaces
+nnoremap <leader>6 :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:w<CR>
+
 " jump to the last position when reopening a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
 " Disable automatical comment insertion
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-" Auto closing brackets.
+
+" Timestamp
+nnoremap <leader>now :pu=strftime('%H:%M:%S')<CR>
+
+" ROS launch file has xml format
+autocmd BufEnter *.launch :setlocal filetype=xml
+
+" auto closing brackets but escape using leader key
 inoremap ( ()<LEFT>
 inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
 " inoremap <leader>( (
@@ -115,21 +112,18 @@ inoremap { {}<LEFT>
 inoremap <expr> }  strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
 " inoremap <leader>{ {
 inoremap <expr> <CR> strpart(getline('.'), col('.')-1, 1) == "}" ? "\<CR>\<ESC>\k\o" : "<CR>"
-" inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
-" inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
-" inoremap <leader>" "
-" inoremap <leader>' '
-set number relativenumber   " hybrid line number
-set nu rnu                  " hybrid line number
+
+set number relativenumber   " hybrid line number (absolute and relative)
 set noswapfile              " we can use persistent-undo instead of swap files
 set nobackup                " I'd like to save by myself
+set nowritebackup
 set undofile                " maintain undo history between sessions
 set undodir=~/.vim/undodir  " mkdir ~/.vim/undodir
 set ruler                   " highlight current line
 set autoindent              " set paste to disable auto indent
 set mouse+=a                " enable mouse to browse documentation in code
 set title                   " show file title
-set scrolloff=7             " scrolling offset
+set scrolloff=9             " scrolling offset
 set hlsearch                " highlight search results
 set ignorecase              " ignore upper or lower case when searching
 set autochdir               " working dir is the same as the file u r editing
@@ -146,10 +140,6 @@ set colorcolumn=80          " Line length limit
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
-
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=300
@@ -159,31 +149,26 @@ set updatetime=300
 set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" NOTE: There's always complete item selected by default, you may want to enable
-" no select by `"suggest.noselect": true` in your configuration file.
-" other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1):
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
+            \ coc#pum#visible() ? coc#pum#next(1):
+            \ CheckBackspace() ? "\<Tab>" :
+            \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion.
 if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
+    inoremap <silent><expr> <c-space> coc#refresh()
 else
-  inoremap <silent><expr> <c-@> coc#refresh()
+    inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -201,11 +186,11 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call ShowDocumentation()<CR>
 
 function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
+    if CocAction('hasProvider', 'hover')
+        call CocActionAsync('doHover')
+    else
+        call feedkeys('K', 'in')
+    endif
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
@@ -219,11 +204,11 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder.
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Applying codeAction to the selected region.
@@ -252,12 +237,12 @@ omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+    nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+    inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+    vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+    vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
 " Use CTRL-S for selections ranges.
@@ -327,7 +312,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 " Python docstirng style
-let g:ultisnips_python_style = 'numpy'
+let g:ultisnips_python_style = 'google'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -368,17 +353,17 @@ let g:NERDToggleCheckAllLines = 1
 " vim-codefmt
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup autoformat_settings
-  autocmd FileType bzl AutoFormatBuffer buildifier
-  autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
-  autocmd FileType dart AutoFormatBuffer dartfmt
-  autocmd FileType go AutoFormatBuffer gofmt
-  autocmd FileType gn AutoFormatBuffer gn
-  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
-  autocmd FileType java AutoFormatBuffer google-java-format
-  autocmd FileType python AutoFormatBuffer yapf
-  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
-  autocmd FileType rust AutoFormatBuffer rustfmt
-  autocmd FileType vue AutoFormatBuffer prettier
+    autocmd FileType bzl AutoFormatBuffer buildifier
+    autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+    autocmd FileType dart AutoFormatBuffer dartfmt
+    autocmd FileType go AutoFormatBuffer gofmt
+    autocmd FileType gn AutoFormatBuffer gn
+    autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+    autocmd FileType java AutoFormatBuffer google-java-format
+    autocmd FileType python AutoFormatBuffer yapf
+    " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+    autocmd FileType rust AutoFormatBuffer rustfmt
+    autocmd FileType vue AutoFormatBuffer prettier
 augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -394,25 +379,23 @@ let g:cosco_ignore_comment_lines = 1     " Default : 0
 map <C-c> :VimtexTocToggle<CR>
 let g:vimtex_view_general_viewer = 'okular'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
-" let g:vimtex_view_general_options_latexmk = '--unique'
 let g:vimtex_compiler_latexmk = {
-    \ 'build_dir' : 'build',
-    \ 'options' : [
-    \   '-pdf',
-    \   '-shell-escape',
-    \   '-verbose',
-    \   '-file-line-error',
-    \   '-synctex=1',
-    \   '-interaction=nonstopmode',
-    \ ],
-    \}
-
+            \ 'build_dir' : 'build',
+            \ 'options' : [
+            \   '-pdf',
+            \   '-shell-escape',
+            \   '-verbose',
+            \   '-file-line-error',
+            \   '-synctex=1',
+            \   '-interaction=nonstopmode',
+            \ ],
+            \}
 let g:vimtex_quickfix_ignore_filters = [
-      \ 'Underfull',
-      \ 'Overfull',
-      \ 'Package subfig Warning',
-      \ 'Package balance Warning',
-      \]
+            \ 'Underfull',
+            \ 'Overfull',
+            \ 'Package subfig Warning',
+            \ 'Package balance Warning',
+            \]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " taglist
@@ -447,129 +430,34 @@ vmap <silent> <Leader>t <Plug>TranslateWV
 autocmd filetype py nnoremap <silent> <F5> :term python %<cr>
 autocmd filetype cpp nnoremap <silent> <F5> :w <bar> !g++-8 -std=c++17 % -o %:r && ./%:r<CR>
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " markdown-preview
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set to 1, nvim will open the preview window after entering the markdown buffer
-" default: 0
 let g:mkdp_auto_start = 0
-
-" set to 1, the nvim will auto close current preview window when change
-" from markdown buffer to another buffer
-" default: 1
 let g:mkdp_auto_close = 1
-
-" set to 1, the vim will refresh markdown when save the buffer or
-" leave from insert mode, default 0 is auto refresh markdown as you edit or
-" move the cursor
-" default: 0
 let g:mkdp_refresh_slow = 0
-
-" set to 1, the MarkdownPreview command can be use for all files,
-" by default it can be use in markdown file
-" default: 0
 let g:mkdp_command_for_global = 0
-
-" set to 1, preview server available to others in your network
-" by default, the server listens on localhost (127.0.0.1)
-" default: 0
 let g:mkdp_open_to_the_world = 0
-
-" use custom IP to open preview page
-" useful when you work in remote vim and preview on local browser
-" more detail see: https://github.com/iamcco/markdown-preview.nvim/pull/9
-" default empty
 let g:mkdp_open_ip = ''
-
-" specify browser to open preview page
-" default: ''
 let g:mkdp_browser = ''
-
-" set to 1, echo preview page url in command line when open preview page
-" default is 0
 let g:mkdp_echo_preview_url = 0
-
-" a custom vim function name to open preview page
-" this function will receive url as param
-" default is empty
 let g:mkdp_browserfunc = ''
-
-" options for markdown render
-" mkit: markdown-it options for render
-" katex: katex options for math
-" uml: markdown-it-plantuml options
-" maid: mermaid options
-" disable_sync_scroll: if disable sync scroll, default 0
-" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
-"   middle: mean the cursor position alway show at the middle of the preview page
-"   top: mean the vim top viewport alway show at the top of the preview page
-"   relative: mean the cursor position alway show at the relative positon of the preview page
-" hide_yaml_meta: if hide yaml metadata, default is 1
-" sequence_diagrams: js-sequence-diagrams options
-" content_editable: if enable content editable for preview page, default: v:false
-" disable_filename: if disable filename header for preview page, default: 0
 let g:mkdp_preview_options = {
-    \ 'mkit': {},
-    \ 'katex': {},
-    \ 'uml': {},
-    \ 'maid': {},
-    \ 'disable_sync_scroll': 0,
-    \ 'sync_scroll_type': 'middle',
-    \ 'hide_yaml_meta': 1,
-    \ 'sequence_diagrams': {},
-    \ 'flowchart_diagrams': {},
-    \ 'content_editable': v:false,
-    \ 'disable_filename': 1
-    \ }
-
-" use a custom markdown style must be absolute path
-" like '/Users/username/markdown.css' or expand('~/markdown.css')
+            \ 'mkit': {},
+            \ 'katex': {},
+            \ 'uml': {},
+            \ 'maid': {},
+            \ 'disable_sync_scroll': 0,
+            \ 'sync_scroll_type': 'middle',
+            \ 'hide_yaml_meta': 1,
+            \ 'sequence_diagrams': {},
+            \ 'flowchart_diagrams': {},
+            \ 'content_editable': v:false,
+            \ 'disable_filename': 1
+            \ }
 let g:mkdp_markdown_css = ''
-
-" use a custom highlight style must absolute path
-" like '/Users/username/highlight.css' or expand('~/highlight.css')
 let g:mkdp_highlight_css = ''
-
-" use a custom port to start server or random for empty
 let g:mkdp_port = ''
-
-" preview page title
-" ${name} will be replace with the file name
 let g:mkdp_page_title = '「${name}」'
-
-" recognized filetypes
-" these filetypes will have MarkdownPreview... commands
 let g:mkdp_filetypes = ['markdown']
-
-" example
-nmap <C-s> <Plug>MarkdownPreview
-nmap <M-s> <Plug>MarkdownPreviewStop
 nmap <C-p> <Plug>MarkdownPreviewToggle
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remove all trailing whitespace by pressing \6
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>6 :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Pydocstring
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:pydocstring_formatter = 'numpy'
-nmap <silent> <leader>d <Plug>(pydocstring)
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Telescope
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Timestamp
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>now :pu=strftime('%H:%M:%S')<CR>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ROS
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd BufEnter *.launch :setlocal filetype=xml
