@@ -25,6 +25,9 @@ cd ~/.config/nvim/
 wget https://raw.githubusercontent.com/Weizhe-Chen/Vim4Robotics/main/init.vim
 echo "let g:python3_host_prog='$(which python3)'" >> ~/.config/nvim/init.vim
 echo "let g:coc_node_path='$(which node)'" >> ~/.config/nvim/init.vim
-nvim +'PlugInstall --sync' +qa
-nvim +'CocInstall -sync coc-json' +qall
-nvim +CocUpdateSync +qall
+nvim --headless +'PlugInstall --sync' +qall
+nvim --headless +'CocInstall -sync coc-pyright coc-git coc-cmake coc-json coc-vimtex coc-clangd coc-snippets' +qall
+nvim --headless +CocUpdateSync +qall
+nvim --headless +':call mkdp#util#install()' +qall
+nvim +':checkhealth'
+wget https://raw.githubusercontent.com/Weizhe-Chen/Vim4Robotics/main/conf.vim -O ->> ~/.config/nvim/init.vim
