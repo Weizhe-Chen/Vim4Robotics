@@ -1,4 +1,6 @@
 #!/bin/bash
+start=$(date +%s)
+
 echo -e "\e[32m[Remove Neovim]\e[0m"
 sudo snap remove nvim
 
@@ -20,6 +22,9 @@ rm -rf ~/.config/coc
 rm -rf ~/.config/nvim
 
 echo -e "\e[32m[Successfully uninstalled Neovim!]\e[0m"
-echo -e "\e[33m[Please also remove the exported PATH variable in ~/.bashrc]\e[0m"
 
+end=$(date +%s)
+echo -e "\e[32m[Uninstallation Time: $(($end-$start)) seconds]\e[0m"
+
+echo -e "\e[33m[Please also remove the exported PATH variable in ~/.bashrc]\e[0m"
 

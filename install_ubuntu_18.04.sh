@@ -1,4 +1,7 @@
 #!/bin/bash
+
+start=$(date +%s)
+
 echo -e "\e[32m[Install Neovim and ctags]\e[0m"
 sudo snap install nvim --classic
 sudo snap install universal-ctags
@@ -29,5 +32,11 @@ nvim --headless +'PlugInstall --sync' +qall
 nvim --headless +'CocInstall -sync coc-pyright coc-git coc-cmake coc-json coc-vimtex coc-clangd coc-snippets' +qall
 nvim --headless +CocUpdateSync +qall
 nvim --headless +':call mkdp#util#install()' +qall
-nvim +':checkhealth'
 wget https://raw.githubusercontent.com/Weizhe-Chen/Vim4Robotics/main/conf.vim -O ->> ~/.config/nvim/init.vim
+
+end=$(date +%s)
+echo -e "\e[32m[Installation Time: $(($end-$start)) seconds]\e[0m"
+
+echo -e "\e[33m[You should see green OKs in the pop up window!]\e[0m"
+
+nvim +':checkhealth'
