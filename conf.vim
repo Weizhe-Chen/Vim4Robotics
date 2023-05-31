@@ -424,3 +424,7 @@ let g:mkdp_port = ''
 let g:mkdp_page_title = '「${name}」'
 let g:mkdp_filetypes = ['markdown']
 nmap <C-p> <Plug>MarkdownPreviewToggle
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Python and NodeJS paths
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

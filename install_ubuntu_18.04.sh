@@ -41,7 +41,6 @@ end=$(date +%s)
 echo -e "\e[32m[Installation Time: $(($end-$start)) seconds]\e[0m"
 
 echo -e "\e[33m[You should see green OKs in the following pop-up window!]\e[0m"
-read -e "\e[33m[Exit Neovim with :q]\e[0m"
-read -p -e "\e[33m[Press [Enter] to continue]\e[0m"
+read -p "Press [Enter] to continue"
 
 nvim +':checkhealth'
