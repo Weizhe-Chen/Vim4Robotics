@@ -3,6 +3,7 @@
 start=$(date +%s)
 
 echo -e "\e[32m[Install Neovim and ctags]\e[0m"
+sudo apt remove vim neovim -y
 sudo snap install nvim --classic
 sudo snap install universal-ctags
 
@@ -14,9 +15,13 @@ pip3 install --upgrade pip
 pip3 install pynvim pygments neovim-remote unidecode
 
 echo -e "\e[32m[Install NodeJS dependencies]\e[0m"
+sudo apt remove nodejs
 mkdir -p ~/Neovim/bin && cd ~/Neovim
 export PATH=$PATH:$HOME/Neovim/bin
-echo "export PATH=$PATH:$HOME/Neovim/bin" >> ~/.bashrc
+echo '################################################################################' >> ~/.bashrc
+echo '# Neovim environment variables' >> ~/.bashrc
+echo '################################################################################' >> ~/.bashrc
+echo 'export PATH=$PATH:$HOME/Neovim/bin' >> ~/.bashrc
 echo "alias vim='nvim'" >> ~/.bashrc
 curl -sfLS install-node.vercel.app | bash -s -- --prefix=$HOME/Neovim --version=16 -y
 ./bin/npm install -g npm neovim yarn
@@ -48,7 +53,7 @@ wget https://raw.githubusercontent.com/Weizhe-Chen/Vim4Robotics/main/.latexmkrc
 end=$(date +%s)
 echo -e "\e[32m[Installation Time: $(($end-$start)) seconds]\e[0m"
 
-echo -e "\e[33m[You should see green OKs in the following pop-up window!]\e[0m"
+echo -e "\e[33m[In the pop-up Neovim window, you should see all green OKs except for Ruby and Perl!]\e[0m"
 read -p "Press [Enter] to continue"
 
 nvim +':checkhealth'
