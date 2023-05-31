@@ -35,4 +35,3 @@ Plug 'voldikss/vim-translator'
 Plug 'github/copilot.vim'
 call plug#end()
 
-
