@@ -24,7 +24,7 @@ echo '##########################################################################
 echo 'export PATH=$PATH:$HOME/Neovim/bin' >> ~/.bashrc
 echo "alias vim='nvim'" >> ~/.bashrc
 curl -sfLS install-node.vercel.app | bash -s -- --prefix=$HOME/Neovim --version=16 -y
-./bin/npm install -g npm neovim yarn
+./bin/npm install -g npm neovim yarn js-beautify
 
 echo -e "\e[32m[Install vim-plug]\e[0m"
 curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
